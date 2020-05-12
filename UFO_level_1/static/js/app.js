@@ -8,19 +8,20 @@ var tableData = data;
 var tbody = d3.select('tbody');
 // *** console.log(tbody);
 
- // Step 5: Use d3 to update each cell's text with
- // weather report values (weekday, date, high, low)
- data.forEach(function(ufoData) {
+ // Use d3 to update each cell's text with
+ // UFO sighting information (Date, City, State, Country, Shape, Duration, Comments)
+ //data.forEach(function(ufoData) {
+  ///filteredData.forEach(function(ufoData) {
    // *** console.log(ufoData);
-   var row = tbody.append("tr");
-   Object.entries(ufoData).forEach(function([key, value]) {
+   ///var row = tbody.append("tr");
+   ///Object.entries(ufoData).forEach(function([key, value]) {
      // *** console.log(key, value);
      // Append a cell to the row for each value
      // in the weather report object
-     var cell = row.append("td");
-     cell.text(value);
-   });
- });
+     ///var cell = row.append("td");
+     ///cell.text(value);
+   ///});
+ ///});
 
 
  // Select the button
@@ -56,7 +57,20 @@ function runEnter() {
   console.log(inputValue);
   //console.log(tableData);
 
-  var filteredData = tableData.filter(eventDate => tableData.datetime === inputValue);
-
+  var filteredData = tableData.filter(rowData => rowData.datetime === inputValue);
+ 
   console.log(filteredData);
+
+  filteredData.forEach(function(ufoData) {
+    // *** console.log(ufoData);
+    var rows = tbody.append("tr");
+    Object.entries(ufoData).forEach(function([key, value]) {
+      // *** console.log(key, value);
+      // Append a cell to the row for each value
+      // in the weather report object
+      var cell = rows.append("td");
+      cell.text(value);
+    });
+  });
+
 };
