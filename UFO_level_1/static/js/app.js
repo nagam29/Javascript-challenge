@@ -2,29 +2,27 @@
 var tableData = data;
 
 // YOUR CODE HERE!
-// *** console.log(tableData);
+//console.log(tableData);
 
-// Get a reference to the table body
+// Get a whole table
 var tbody = d3.select('tbody');
-// *** console.log(tbody);
 
- // Use d3 to update each cell's text with
- // UFO sighting information (Date, City, State, Country, Shape, Duration, Comments)
- //data.forEach(function(ufoData) {
-  ///filteredData.forEach(function(ufoData) {
-   // *** console.log(ufoData);
-   ///var row = tbody.append("tr");
-   ///Object.entries(ufoData).forEach(function([key, value]) {
-     // *** console.log(key, value);
-     // Append a cell to the row for each value
-     // in the weather report object
-     ///var cell = row.append("td");
-     ///cell.text(value);
-   ///});
- ///});
+function builtTable(data){
+  tbody.html(" ");
+  data.forEach((dataLoad)=>{
+    var row=tbody.append("tr");
+    Object.values(dataLoad).forEach((value)=>{
+      var cell=row.append("td");
+      cell.text(value);
+    });
+  });
+
+}
+builtTable(tableData);
 
 
- // Select the button
+
+// Select the button
 var button = d3.select("#filter-btn");
 
 // Select the form
@@ -34,14 +32,13 @@ var form = d3.select("#form");
 button.on("click", runEnter);
 form.on("submit",runEnter);
 
-// button.onclick=runEnter;
-// form.onsubmit=runEnter;
 
 console.log(button);
 console.log(form);
 
 // Complete the event handler function for the form
 function runEnter() {
+  tbody.html("");
   console.log("in runEnter");
 
   // Prevent the page from refreshing
@@ -61,16 +58,21 @@ function runEnter() {
  
   console.log(filteredData);
 
+  // If I call the function starting line 10, 
+  // probably it works, instead of writing the same function again below...
+  // I am keeping the function below for practice. Commenting out function call ... 
+
+  // builtTable(filteredData)  
+
+
   filteredData.forEach(function(ufoData) {
     // *** console.log(ufoData);
     var rows = tbody.append("tr");
-    Object.entries(ufoData).forEach(function([key, value]) {
-      // *** console.log(key, value);
-      // Append a cell to the row for each value
-      // in the weather report object
-      var cell = rows.append("td");
-      cell.text(value);
-    });
-  });
+     Object.entries(ufoData).forEach(function([key, value]) {
+       // *** console.log(key, value);
+       var cell = rows.append("td");
+       cell.text(value);
+     });
+   });
 
 };
